@@ -1,10 +1,9 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
 Version: 1.0.0
 Title: webimage
-Description: __diagram__ generates dynamic diagrams using 
-[DOT markup language](http://en.wikipedia.org/wiki/Dot)  
-and exports images in __pdf__, __png__, __jpeg__, __gif__, and __bmp__ format. For 
-more information [visit diagram homepage](http://www.haghish.com/dot).
+Description: prints images from web files in __pdf__, __png__, __jpeg__, 
+__gif__, and __bmp__ format. For 
+more information [visit webimage homepage on GitHub](https://github.com/haghish/webimage).
 ----------------------------------------------------- DO NOT EDIT THIS LINE ***/
 
 
@@ -23,8 +22,8 @@ Syntax
 ======
 
 {p 8 16 2}
-{cmd: diagram} [{it:DOT} | {help using} {it:filename}] [{cmd:,} 
-{it:replace} {it:export(filename)} {it:magnify(real)} {it:phantomjs(str)} {it:engine(name)} ]
+{cmd: webimage} [{it:filename} | {it:http address}] [{cmd:,} 
+{it:replace} {it:export(str)} {it:phantomjs(str)} ]
 {p_end}
 
 {* the new Stata help format of putting detail before generality}{...}
@@ -32,15 +31,8 @@ Syntax
 {synopthdr}
 {synoptline}
 {synopt:{opt replace}}replace the exported diagram{p_end}
-{synopt:{opt engine(name)}}specifies the  
-{browse "http://www.graphviz.org/Download.php":graphViz} engine for rendering the 
-diagram which can be {bf:dot}, {bf:osage}, {bf:circo}, {bf:neato}, {bf:twopi} and {bf:fdp}s. 
-The default engine is {bf:dot} {p_end}
-{synopt:{opt e:xport(filename)}}export the diagram. The file extension specifies the 
+{synopt:{opt e:xport(str)}}specifies the image filename. The file extension specifies the 
 format and it can be {bf:.pdf}, {bf:.png}, {bf:.jpeg}, {bf:.gif}, or {bf:.bmp}{p_end}
-{synopt:{opt mag:nify(real)}}increases the resolution of the exported image by multiplying its 
-resolution to the specified number. The value of the real number should be above {bf:0} and 
-by default is {bf:1.0}{p_end}
 {synopt:{opt phantomjs(str)}}specifies the path to executable 
 [phantomjs software](http://www.phantomjs.org/download.html) on the machine{p_end}
 {synoptline}
@@ -50,54 +42,15 @@ by default is {bf:1.0}{p_end}
 Description
 ===========
 
-__diagram__ renders [graphViz](http://www.graphviz.org/Download.php) graphs 
-within Stata and exports them to several graphical formats including __pdf__, 
-__png__, __jpeg__, __gif__, and __bmp__. This package is 
-independent of the software and does not require installing graphViz. The __diagram__ 
-command can render a graph using _DOT_ markup or by using file that includes the 
-markup. For large graphs, it is advices to create a file and then render the graph. 
+[webimage](https://github.com/haghish/webimage) converts web files and online 
+web addresses to graphical images including __pdf__, __png__, __jpeg__, 
+__gif__, and __bmp__ formats. 
 
-[graphViz](http://www.graphviz.org/Download.php) is an open source graph visualization 
-software which can be used to represent structural information such as diagrams of 
-algorithms, groups, abstract graphs, and networks. The software has had notable 
-applications in a variety of fields such as network visualization, bioinformatics,  
-machine learning. The software renders graphics using a markup language which is 
-highly customizable and can be altered with precision. Yet, it can be written in a 
-very simple and basic way to make it human-readable. FOr more information regarding 
-the software visit [graphViz homepage](http://www.graphviz.org/). 
-
-This package can have plenty of applications for Stata users. For example, it can 
-be used to develop analysis diagrams, visualize information/algorithms, create 
-diagrams for education purpose as well as write Stata programs that generate 
-dynamic diagrams based on the results of data analysis. 
-
-
-Engines
-=======
-
-[graphViz](http://www.graphviz.org/Documentation/pdf/libguide.pdf) has several engines which are __dot__, 
-__neato__, __fdp__, __twopi__, __circo__, and __osage__. These engines render the 
-diagrams differently but their markup is not identical. All of these engines are 
-supported in this package but the user should read the engines carefully. 
-The most popular engines are __dot__ and __neato__. A brief description of the 
-engines is presented below : 
-
-[dot](http://www.graphviz.org/pdf/dot.1.pdf) - "directed graphs" which is the 
-default engine for rendering graphs where edges have directionality e.g. 
-{bf:A -> B}.
-
-[neato](http://www.graphviz.org/pdf/neatoguide.pdf) is recommended for undirected diagrams, 
-especially when the size of the diagram is about 100 nodes or less. 
-
-[fdp](http://www.graphviz.org/pdf/fdp.1.pdf) draws undirected graphs similar to 
-__neato__, but applies different layouts.
-
-[twopi](http://www.graphviz.org/pdf/twopi.1.pdf) applies radial layouts. 
-
-[circo](http://www.graphviz.org/pdf/circo.1.pdf) applies circular layouts.
-
-[osage](http://www.graphviz.org/pdf/osage.1.pdf) applies clustered layouts.
-
+the package can have many implications in statistics and data visualization. 
+many web applets are developed using JavaScript for data visualization and 
+presentation. however, these web-applications are usually stored in a HTML 
+file. the __webimage__ package provides a solution for converting the web content 
+to a graphical file.
 
 Third-party software
 ====================
@@ -111,20 +64,13 @@ graphical files.
 Example(s)
 =================
 
-    rendering DOT markup
-        . graphviz digraph G {a -> b;}, magnify(2.5) export(../diagram.png) 	///
+    rendering a web file to a PDF image 
+        . webimage filename.html, export(./image.pdf)                           ///
+          phantomjs("/usr/local/bin/phantomjs")	
+
+    rendering an online webpage to PNG
+        . webimage "http://www.google.com", export(./image.png)                 ///
           phantomjs("/usr/local/bin/phantomjs")
-
-    rendering a graphviz file
-        . graphviz using myfile.dot, magnify(2.5) export(../diagram.png) 	///
-          phantomjs("/usr/local/bin/phantomjs")
-
-		  
-Acknowledgements
-================
-
-The JavaScript engine of the program was developed by 
-[Michael Daines](https://www.github.com/mdaines).  
 
 Author
 ======
@@ -146,8 +92,7 @@ Package Updates on [Twitter](http://www.twitter.com/Haghish)
 cap prog drop webimage     
 prog define webimage
 	version 11
-	syntax [anything] , Export(str) [MAGnify(real 1.0)] [replace] 		///
-	[phantomjs(str)] [install] [Noisily]
+	syntax [anything] , Export(str) [replace] [phantomjs(str)] [Noisily]
 	 
 
 	
@@ -177,7 +122,7 @@ prog define webimage
 	if missing("`phantomjs'") local phantomjs phantomjs
 	else confirm file "`phantomjs'"
 	  
-	local anything : di `"'`macval(anything)''"'
+	*local anything : di `"'`macval(anything)''"'
 	
 	
 	if missing("`replace'") {
@@ -201,9 +146,9 @@ prog define webimage
 		error 198
 	}
 	
-	qui copy "`tmp'" "_tmp_file_000.html", replace
+	*qui copy "`tmp'" "_tmp_file_000.html", replace
 	
-	! "`phantomjs'" "`command'" "_tmp_file_000.html" "`export'"
+	! "`phantomjs'" "`command'" "`anything'" "`export'"
 	
 	if missing("`noisily'") capture qui erase "_tmp_file_000.html"
 	
@@ -215,6 +160,7 @@ prog define webimage
 	
 end
 
+* webimage "http://www.google.com", exp(example.png) phantomjs("/usr/local/bin/phantomjs") replace
 
  markdoc webimage.ado, exp(sthlp) replace
 * markdoc diagram.ado, exp(pdf) replace style(stata) title("Dynamic Diagrams in Stata") author("E. F. Haghish") date 

@@ -1,0 +1,28 @@
+d 'WEBIMAGE': module for rendering web files and websites to graphical images 
+d  such as PDF, PNG, JPEG, GIF, and BMP
+d
+d 
+d KW: graphic
+d KW: image
+d KW: figure
+d KW: graph
+d KW: web
+d KW: html
+d KW: website
+d KW: javascript
+d KW: pdf
+d KW: png
+d KW: gif
+d KW: bmp
+d KW: jpeg
+d
+d Requires: Stata version 11 or higher
+d
+d Distribution-Date: 20160625
+d
+d Author: E.F. Haghish, University of Freiburg
+d Support: email haghish@imbi.uni-freiburg.de
+d
+f webimage.ado
+f webimage.sthlp
+F diagram.js

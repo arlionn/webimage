@@ -1,0 +1,3 @@
+v 1
+d 'WEBIMAGE': module for rendering web files and websites to graphical images 
+d  such as PDF, PNG, JPEG, GIF, and BMP
