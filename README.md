@@ -23,7 +23,7 @@ The __webimage__ releases are also hosted on SSC server. So you can download the
 You can also directly download __webimage__ from GitHub which includes the latest beta version (unreleased). The `force` 
 option ensures that you _reinstall_ the package, even if the release date is not yet changed, and thus, must be specified. 
   
-    net install diagram, force  from("https://raw.githubusercontent.com/haghish/webimage/master/")
+    net install webimage, force  from("https://raw.githubusercontent.com/haghish/webimage/master/")
     
 For exporting graphical files, the package requires [phantomJS](http://phantomjs.org/download.html), 
 which is an open-source freeware available for Windows, Mac, and Linux. The 
